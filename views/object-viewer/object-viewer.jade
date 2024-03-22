@@ -1,0 +1,191 @@
+template#object-viewer
+    .object-viewer.right-sidebar(data-bind="css: { 'right-sidebar_shown': $parent.page == 'OBJECT_VIEWER' || $parent.page == 'MY_OBJECT_VIEWER' || $parent.page == 'FAV_OBJECT' }")
+        
+        
+        .object-viewer__header Описание объекта
+            a.object-viewer__close(data-bind="attr: { href: mode == 'VIEW' ? '/find' : mode == 'FAVORITE' ? '/favorites' : '/find/my' }") ✕
+        
+                
+        .object-viewer__loader(data-bind="visible: active")
+            .loader
+        .object-viewer__content.scrollable(data-bind="visible: !active, scroll: 500, scrollTo: scrollPos")
+            .scrollable__container
+                
+                
+                // ko if: getPhotos().length
+                .object-viewer__cover(data-bind="style: { 'background-image': 'url('+photo+')' }, click: viewPhoto")
+                    .object-viewer__cover-padder
+                slider.slider(params="photos: getPhotos, selected: getObservableFor('photo'), delta: 62.5, count: 4")
+                .object-viewer__separator
+                // /ko
+                    
+                    
+                .object-viewer__info
+                    .icon.address
+                    // ko text: selectedObject.city + ', ' + selectedObject.address
+                    // /ko
+                .object-viewer__info
+                    .icon.cost
+                    span(data-bind="cost: selectedObject.cost + (selectedObject.operation == 'RENT' ? ' рублей/месяц' :' рублей')")
+                .object-viewer__separator
+                    
+                    
+                h1.object-viewer__heading Общая информация
+                
+                .object-viewer__main
+                    p.object-viewer__main-key Дата создания
+                    p.object-viewer__main-value(data-bind="date: selectedObject.addDate")
+                .object-viewer__main
+                    p.object-viewer__main-key Номер объявления
+                    p.object-viewer__main-value(data-bind="text: selectedObject.id")
+                .object-viewer__main
+                    p.object-viewer__main-key Район
+                    p.object-viewer__main-value(data-bind="text: !selectedObject.region ? 'нет' : selectedObject.region")
+                .object-viewer__main
+                    p.object-viewer__main-key Тип сделки
+                    p.object-viewer__main-value(data-bind="text: selectedObject.operation == 'RENT' ? 'аренда' : 'продажа'")
+                    
+                .object-viewer__main
+                    p.object-viewer__main-key Объект недвижимости
+                    p.object-viewer__main-value(data-bind="text: selectedObject.object == 'APARTMENT' ? 'квартира' : selectedObject.object == 'HOUSE' ? 'дом' : selectedObject.object == 'PARCEL' ? 'участок' : 'нежилое'")
+                
+                .object-viewer__main
+                    p.object-viewer__main-key Общая площадь
+                    p.object-viewer__main-value(data-bind="text: selectedObject.sqmain + ' м²'")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'APARTMENT' || selectedObject.object == 'HOUSE'")
+                    p.object-viewer__main-key Жилая площадь
+                    p.object-viewer__main-value(data-bind="text: selectedObject.sqliving + ' м²'")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'APARTMENT' || selectedObject.object == 'HOUSE'")
+                    p.object-viewer__main-key Площадь кухни
+                    p.object-viewer__main-value(data-bind="text: selectedObject.sqkitchen + ' м²'")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'HOUSE'")
+                    p.object-viewer__main-key Площадь участка
+                    p.object-viewer__main-value(data-bind="text: selectedObject.sqarea + ' м²'")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'APARTMENT' || selectedObject.object == 'HOUSE'")
+                    p.object-viewer__main-key Этажность
+                    p.object-viewer__main-value(data-bind="text: selectedObject.floors")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'APARTMENT'")
+                    p.object-viewer__main-key Этаж
+                    p.object-viewer__main-value(data-bind="text: selectedObject.floor")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'APARTMENT' || selectedObject.object == 'HOUSE'")
+                    p.object-viewer__main-key Количество комнат
+                    p.object-viewer__main-value(data-bind="text: selectedObject.rooms")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'APARTMENT'")
+                    p.object-viewer__main-key Тип дома
+                    p.object-viewer__main-value(data-bind="text: selectedObject.type == 'MONOLITH' ? 'монолитный' : selectedObject.type == 'MONOLITHBRICK' ? 'монолит-кирпич' : selectedObject.type == 'BRICK' ? 'кирпичный' : selectedObject.type == 'BLOCK' ? 'блочный' : 'панельный'")
+                
+                .object-viewer__main(data-bind="visible: selectedObject.object == 'INDUSTRIAL'")
+                    p.object-viewer__main-key Тип нежилого
+                    p.object-viewer__main-value(data-bind="text: selectedObject.industrialType == 'OFFICE' ? 'офис' : selectedObject.industrialType == 'COMMERCIAL' ? 'коммерческое' : selectedObject.industrialType == 'STOCK' ? 'склад' : selectedObject.industrialType == 'MANUFACTURE' ? 'производственное' : selectedObject.industrialType == 'GARAGE' ? 'гараж' : selectedObject.industrialType == 'PARCKING' ? 'парковка' : selectedObject.industrialType == 'HOTEL' ? 'гостиница' : 'свободного назначения'")
+                .object-viewer__main(data-bind="visible: (selectedObject.object == 'APARTMENT' || selectedObject.object == 'HOUSE') && selectedObject.operation == 'SELL'")
+                    p.object-viewer__main-key Ремонт
+                    p.object-viewer__main-value(data-bind="text: selectedObject.decor ? 'есть' : 'нет'")
+                    
+                
+                // ko if: additionalLength()
+                content-slider.content-slider(params="length: additionalLength, delta: 120, count: 3")
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.hypothec") 
+                        .icon.hypothec
+                        br
+                        |ипотека
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.lift")
+                        .icon.lift
+                        br
+                        |лифт
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.parking")
+                        .icon.parking
+                        br
+                        |парковка
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.internet")
+                        .icon.internet
+                        br
+                        |интернет
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.furniture")
+                        .icon.furniture
+                        br
+                        |мебель
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.appliances")
+                        .icon.tech
+                        br
+                        |техника
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.water")
+                        .icon.water
+                        br
+                        |вода
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.gas")
+                        .icon.gas
+                        br
+                        |газ
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.electricity")
+                        .icon.electricity
+                        br
+                        |электричество
+                    .content-slider__item(data-bind="visible: $parent.selectedObject.canalization")
+                        .icon.canalization
+                        br
+                        |канализация
+                .object-viewer__separator
+                // /ko
+                    
+                // ko if: selectedObject.description 
+                h1.object-viewer__heading Описание
+                .object-viewer__description(data-bind="text: selectedObject.description")
+                // /ko
+                    
+                h1.object-viewer__heading Контакты
+                .object-viewer__contact
+                    p.object-viewer__contact-key Контактное лицо
+                    p.object-viewer__contact-value(data-bind="text: selectedObject.fio")
+                    .icon.fio
+                    .object-viewer__separator
+                .object-viewer__contact
+                    p.object-viewer__contact-key Номер телефона
+                    a.object-viewer__contact-value(data-bind="phone: selectedObject.phone, attr: { href: 'tel:+7'+selectedObject.phone }")
+                    .icon.phone
+                
+                // ko if: selectedObject.relatedObjects.length
+                h1.object-viewer__heading Похожие объявления
+                .object-viewer__separator
+                // /ko
+                // ko foreach: selectedObject.relatedObjects
+                a.objects-list__results-item.objects-list__results-item_center(data-bind="attr: { href: '/find/'+id }, click: $parent.resetScroll.bind($parent)")
+                    .objects-list__results-item-date
+                        p(data-bind="text: '№' + id")
+                        p(data-bind="date: addDate")
+                    .objects-list__results-item-cover(data-bind="style: { 'background-image': 'url('+ (files[0] ? files[0].path+'/s' : '/resources/images/default') + '.jpg)' }")
+                    .objects-list__results-item-info
+                        p
+                            span(data-bind="text: address")
+                            span.icon.address
+                        p
+                            span(data-bind="cost: cost + ' рублей'")
+                            span.icon.cost
+                        p
+                            span(data-bind="text: fio")
+                            span.icon.fio
+                        p
+                            span(data-bind="phone: phone")
+                            span.icon.phone
+                    .objects-list__results-item-additional
+                        p(data-bind="text: sqmain + ' м²'")
+                        p(data-bind="text: object == 'APARTMENT' ? 'Квартира' : object == 'HOUSE' ? 'Дом' : object == 'PARCEL' ? 'Участок' : 'Нежилое'")
+                        p(data-bind="text: operation == 'RENT' ? 'Аренда' : 'Продажа'")
+                // /ko
+                        
+                // ko if: $parent.page == 'MY_OBJECT_VIEWER'
+                .object-viewer__edit-container
+                    a.green-convex-button(data-bind="attr: { href: '/edit/'+id }") Редактировать
+                    br
+                    button.blue-convex-button(data-bind="click: remove") Удалить
+                // /ko
+                // ko if: $parent.page == 'FAV_OBJECT'
+                .object-viewer__edit-container
+                    button.blue-convex-button(data-bind="click: removeFavorite") Удалить
+                // /ko

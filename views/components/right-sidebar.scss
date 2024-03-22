@@ -1,0 +1,17 @@
+.right-sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.5);
+    @include transform(translateX(100%));
+    @include transition-property(transform);
+    @include transition-duration(500ms);
+    @include transition-timing-function(ease-in-out);
+    
+    &_shown {
+        @include transform(translateX(0));
+    }
+}

@@ -1,0 +1,7 @@
+template#social
+
+    .social__label Войти через аккаунт социальной сети
+        .loader(data-bind="visible: active")
+    a.icon.fb(data-bind="click: signin.bind($data, 'fb')")
+    a.icon.ok(data-bind="click: signin.bind($data, 'ok')")
+    a.icon.vk(data-bind="click: signin.bind($data, 'vk')")

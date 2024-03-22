@@ -1,0 +1,36 @@
+template#requests-list
+
+    .requests-list(data-bind="css: { 'requests-list_shown': isShown }")
+        .requests-list__overlay(data-bind="css: { 'requests-list__overlay_shown': isShown }, click: hide")
+        .requests-list__sidebar.right-sidebar(data-bind="css: { 'right-sidebar_shown': isShown }")
+
+            .requests-list__header Подписки
+                a.requests-list__close(data-bind="click: hide") ✕
+            
+            .requests-list__results.scrollable(data-bind="scroll: 500")
+                .scrollable__container
+
+                    // ko if: !requestsCollection().length
+                    .requests-list__results-empty У вас еще нет подписок
+                    // /ko
+
+                    // ko foreach: requestsCollection
+                    .requests-list__results-item
+                        .requests-list__results-item-info
+                            .icon.city
+                            // ko text: 'Город:   '+city
+                            // /ko
+                        .requests-list__results-item-info
+                            .icon.cost
+                            span(data-bind="cost: 'Цена от:   '+costFrom+(operation == 'RENT' ? ' рублей/месяц' :' рублей')")
+                        .requests-list__results-item-info
+                            span(data-bind="cost: 'Цена до:   '+costTo+(operation == 'RENT' ? ' рублей/месяц' :' рублей')")
+                        .requests-list__results-item-additional
+                            .requests-list__results-item-remove(data-bind="click: $parent.remove.bind($parent, $data)") ✕
+                            p(data-bind="text: operation == 'RENT' ? 'Аренда' : 'Продажа'")
+                            p(data-bind="text: object == 'APARTMENT' ? 'Квартира' : object == 'HOUSE' ? 'Дом' : object == 'PARCEL' ? 'Участок' : 'Нежилое'")
+                            p(data-bind="text: 'от ' + (sqmainFrom ? sqmainFrom : 0) + ' м²'")
+                    // /ko
+                    
+                    .requests-list__results-loader-container(data-bind="visible: active")
+                        .loader

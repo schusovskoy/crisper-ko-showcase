@@ -1,0 +1,64 @@
+template#objects-list
+
+    form.objects-list.right-sidebar(data-bind="css: { 'right-sidebar_shown': $parent.page == 'OBJECTS_LIST', 'objects-list_grid': mode == 'GRID' }")
+    
+        .objects-list__header
+            label.objects-list__header-button
+                input(type="radio", name="mode", value="LIST", data-bind="checked: mode")
+                .objects-list__header-button-background
+                .icon.list
+            label.objects-list__header-button
+                input(type="radio", name="mode", value="GRID", data-bind="checked: mode")
+                .objects-list__header-button-background
+                .icon.grid
+            .objects-list__header-results Результатов:&nbsp;&nbsp;
+                span(data-bind="text: count")
+                
+        .objects-list__sort
+            .objects-list__sort-option
+                input(type="radio", name="sort", value="addDate,asc", data-bind="checked: reObjectRequest.sort")
+                input(type="radio", name="sort", value="addDate,desc", data-bind="checked: reObjectRequest.sort")
+                .objects-list__sort-option-name По дате
+            .objects-list__sort-option
+                input(type="radio", name="sort", value="cost,asc", data-bind="checked: reObjectRequest.sort")
+                input(type="radio", name="sort", value="cost,desc", data-bind="checked: reObjectRequest.sort")
+                .objects-list__sort-option-name По цене
+            .objects-list__sort-option
+                input(type="radio", name="sort", value="sqmain,asc", data-bind="checked: reObjectRequest.sort")
+                input(type="radio", name="sort", value="sqmain,desc", data-bind="checked: reObjectRequest.sort")
+                .objects-list__sort-option-name По площади
+                    
+        .objects-list__results.scrollable(data-bind="scroll: 0, refreshScroll: refreshEventEmitter(), lazy: search.bind($data), lazyOffset: 100")
+            .scrollable__container
+            
+                .objects-list__results-wrapper
+                    // ko foreach: reObjectsCollection
+                    a.objects-list__results-item(data-bind="attr: { href: '/find/'+id }, css: { 'objects-list__results-item_center': !$parent.profile.token }")
+                        .objects-list__results-item-date
+                            p(data-bind="visible: $parent.mode == 'LIST', text: '№' + id")
+                            p(data-bind="date: addDate")
+                        .objects-list__results-item-cover(data-bind="style: { 'background-image': 'url('+ (files[0] ? files[0].path + ($parent.mode == 'GRID' ? '/m' : '/s') : '/resources/images/default') + '.jpg)' }")
+                        .objects-list__results-item-info
+                            p
+                                span(data-bind="text: address")
+                                span.icon.address
+                            p
+                                span(data-bind="cost: cost + (operation == 'RENT' ? ' рублей/месяц' :' рублей')")
+                                span.icon.cost
+                            p
+                                span(data-bind="text: fio")
+                                span.icon.fio
+                            p
+                                span(data-bind="phone: phone")
+                                span.icon.phone
+                        .objects-list__results-item-additional
+                            .objects-list__results-item-fav(data-bind="visible: $parent.profile.token, click: $parent.modifyFavorites.bind($parent, $data)")
+                                .icon.fav(data-bind="css: { 'fav_checked': $parent.favoritesIds().indexOf($data.id) != -1 }")
+                            p(data-bind="text: sqmain + ' м²'")
+                            p(data-bind="text: object == 'APARTMENT' ? 'Квартира' : object == 'HOUSE' ? 'Дом' : object == 'PARCEL' ? 'Участок' : 'Нежилое'")
+                            p(data-bind="text: operation == 'RENT' ? 'Аренда' : 'Продажа'")
+                    // /ko
+                    
+                    .objects-list__results-void(data-bind="visible: !active && count == 0") Ничего не найдено
+                    .objects-list__results-loader-container
+                        .loader(data-bind="visible: active")

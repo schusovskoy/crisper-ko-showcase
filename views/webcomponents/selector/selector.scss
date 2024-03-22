@@ -1,0 +1,27 @@
+.selector {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    
+    &__text {
+        height: 100%;
+    }
+    &__options {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        @include transform(scale(0));
+        @include transform-origin(50% 0);
+        @include transition-property(transform);
+        @include transition-duration(100ms);
+        @include transition-timing-function(ease-out);
+        
+        &_shown {
+            @include transform(scale(1));
+        }
+    }
+}

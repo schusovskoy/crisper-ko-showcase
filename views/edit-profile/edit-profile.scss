@@ -1,0 +1,147 @@
+.edit-profile {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    @include transform(scale(0));
+    @include transition-property(transform);
+    @include transition-delay(500ms);
+
+    &_shown {
+        @include transition-delay(0ms);
+        @include transform(scale(1));
+    }
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+    }
+    &__sidebar {
+        text-align: center;
+        padding: 0 40px;
+    }
+    &__header {
+        position: relative;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        font-weight: 600;
+    }
+    &__close {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        font-size: 20px;
+        line-height: 20px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+
+        &:active {
+            font-size: 19px;
+        }
+    }
+    &__avatar {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border: solid 2px $grey;
+        border-radius: 50%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        margin: 0 0 40px 0;
+        text-align: center;
+
+        &:active {
+            opacity: 0.8;
+        }
+        &-progress {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            @extend .icon;
+            @include sprite($ic_edit);
+            margin: 0 0 0 70px;
+        }
+    }
+    &__row {
+        height: 40px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 40px;
+        
+        &-key {
+            float: left;
+        }
+        &-container {
+            float: right;
+            
+            input[type=text], input[type=password] {
+                background-color: $grey;
+                width: 200px;
+                height: 30px;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: normal;
+                padding: 0 20px;
+                vertical-align: middle;
+
+                &:focus {
+                    background-color: #fff;
+                    border: 2px solid $blue;
+                    color: $blue;
+                }
+            }
+        }
+        &-checkbox {
+            display: inline-block;
+            cursor: pointer;
+            vertical-align: middle;
+
+            .icon {
+                @include sprite($ic_add_checkbox);
+            }
+            input:checked + .icon {
+                @include sprite($ic_add_checkbox_checked);
+            }
+        }
+    }
+    &__error {
+        text-align: right;
+        font-size: 12px;
+        color: #a00;
+    }
+    .green-convex-button {
+        margin: 40px 0 0 0;
+        width: 200px;
+    }
+    .loader {
+        width: 20px;
+        height: 20px;
+        box-shadow: inset 0 0 0 2px #fff;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        
+        &:after, &:before {
+            background-color: $green;
+        }
+    }
+}

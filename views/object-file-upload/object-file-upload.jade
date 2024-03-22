@@ -1,0 +1,13 @@
+template#object-file-upload
+
+    // ko foreach: reObject.files
+    .object-file-upload__cover(data-bind="css: { 'object-file-upload__cover_avatar': avatar }, click: $parent.check.bind($parent, $index())")
+        .object-file-upload__cover-container(data-bind="style: { 'background-image': 'url(' + tmpPath + ')' }")
+            .object-file-upload__cover-progress(data-bind="style: { 'transform': 'scaleX(' + (1 - progress) + ')' }")
+        .object-file-upload__cover-delete(data-bind="click: $parent.delete.bind($parent, $index())") ✕
+    // /ko
+
+    label.object-file-upload__cover.object-file-upload__cover_add
+        .object-file-upload__cover-container
+        input(type="file", data-bind="event: { change: upload }")
+        .icon

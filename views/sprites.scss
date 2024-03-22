@@ -1,0 +1,114 @@
+$ic_add_checkbox: -103px -321px 20px 20px;
+$ic_add_checkbox_checked: -143px -321px 20px 20px;
+$ic_add_map: -97px -242px 26px 24px;
+$ic_additional: -123px -242px 26px 24px;
+$ic_apartment_light: -360px -80px 18px 20px;
+$ic_appstore: -152px -45px 164px 50px;
+$ic_area: -43px -242px 26px 26px;
+$ic_at: -360px -100px 18px 20px;
+$ic_burger: -278px -242px 25px 21px;
+$ic_cabinet: -0px -268px 28px 27px;
+$ic_canalization: -103px -212px 30px 30px;
+$ic_checkbox: -360px -289px 13px 13px;
+$ic_checkbox_checked: -360px -276px 13px 13px;
+$ic_cost: -343px -212px 16px 25px;
+$ic_description: -169px -268px 22px 22px;
+$ic_edit: -19px -321px 21px 21px;
+$ic_electric: -43px -212px 30px 30px;
+$ic_elevator: -73px -212px 30px 30px;
+$ic_email: -272px -268px 20px 15px;
+$ic_facebook: -120px -152px 60px 60px;
+$ic_favorites: -147px -268px 22px 22px;
+$ic_find_additional: -69px -242px 28px 24px;
+$ic_find_address: -360px -260px 11px 16px;
+$ic_find_cost: -360px -246px 14px 14px;
+$ic_find_cost_list: -0px -321px 19px 26px;
+$ic_find_fio: -360px -231px 14px 15px;
+$ic_find_floor: -0px -295px 22px 26px;
+$ic_find_map: -101px -268px 24px 22px;
+$ic_find_object: -174px -242px 26px 23px;
+$ic_find_phone: -360px -216px 15px 15px;
+$ic_find_rooms: -303px -242px 27px 19px;
+$ic_find_sq: -28px -268px 27px 27px;
+$ic_find_type: -225px -242px 27px 21px;
+$ic_fio: -360px -21px 19px 20px;
+$ic_floor: -79px -268px 22px 25px;
+$ic_furniture: -223px -212px 30px 30px;
+$ic_gas: -193px -212px 30px 30px;
+$ic_google: -152px -95px 164px 50px;
+$ic_help: -275px -152px 41px 41px;
+$ic_house_light: -203px -321px 20px 18px;
+$ic_information: -234px -152px 41px 41px;
+$ic_internet: -253px -212px 30px 30px;
+$ic_ipoteka: -163px -212px 30px 30px;
+$ic_lock: -360px -141px 17px 20px;
+$ic_logout: -360px -41px 19px 20px;
+$ic_main_cabinet: -330px -242px 26px 19px;
+$ic_main_logo: -313px -212px 30px 27px;
+$ic_main_logo_center: -180px -152px 54px 48px;
+$ic_main_logo_full: -152px -0px 208px 45px;
+$ic_main_logo_mobile: -0px -0px 152px 152px;
+$ic_marker: -0px -212px 43px 56px;
+$ic_mylistings: -55px -268px 24px 25px;
+$ic_object: -200px -242px 25px 23px;
+$ic_office_light: -183px -321px 20px 19px;
+$ic_ok: -0px -152px 60px 60px;
+$ic_operation: -245px -268px 27px 15px;
+$ic_parcel_light: -292px -268px 20px 14px;
+$ic_parking: -283px -212px 30px 30px;
+$ic_phone: -360px -196px 13px 20px;
+$ic_profile: -360px -120px 17px 21px;
+$ic_profile_phone: -360px -161px 18px 18px;
+$ic_radio: -360px -314px 12px 12px;
+$ic_radio_checked: -360px -302px 12px 12px;
+$ic_radio_fav: -82px -321px 21px 20px;
+$ic_radio_fav_checked: -61px -321px 21px 20px;
+$ic_requests: -22px -295px 21px 25px;
+$ic_results_grid: -360px -179px 17px 17px;
+$ic_results_grid_checked: -123px -321px 20px 20px;
+$ic_results_list: -92px -295px 23px 16px;
+$ic_results_list_checked: -69px -295px 23px 16px;
+$ic_rooms: -43px -295px 26px 17px;
+$ic_scroll_arrow_down: -213px -268px 32px 15px;
+$ic_security: -316px -45px 43px 43px;
+$ic_tech: -316px -152px 30px 30px;
+$ic_to_agents: -316px -95px 41px 41px;
+$ic_tool: -163px -321px 20px 19px;
+$ic_type: -252px -242px 26px 21px;
+$ic_upload: -149px -242px 25px 24px;
+$ic_upload_cover: -40px -321px 21px 21px;
+$ic_viber: -360px -0px 19px 21px;
+$ic_viewer_fio: -191px -268px 22px 22px;
+$ic_viewer_phone: -125px -268px 22px 22px;
+$ic_vk: -60px -152px 60px 60px;
+$ic_water: -133px -212px 30px 30px;
+$ic_whatsapp: -360px -61px 19px 19px;
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 3);
+}
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 4);
+}
+@function sprite-width($sprite) {
+   @return nth($sprite, 3);
+}
+@function sprite-height($sprite) {
+   @return nth($sprite, 4);
+}
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 1);
+  $sprite-offset-y: nth($sprite, 2);
+  background-position: $sprite-offset-x $sprite-offset-y;
+}
+@mixin sprite($sprite, $display: block) {
+   @include sprite-position($sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: $display;
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+.icon {
+  background-image: url('/resources/images/sprite.png');
+}

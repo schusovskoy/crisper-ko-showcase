@@ -1,0 +1,5 @@
+template#input-number
+
+    button.input-number__button(data-bind="click: decrease") -
+    input.input-number__input(type="text", data-bind="mask: { pattern: '9{1,' + length + '}', value: value }")
+    button.input-number__button(data-bind="click: increase") +

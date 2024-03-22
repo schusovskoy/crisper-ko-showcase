@@ -1,0 +1,17 @@
+html
+    head
+        script(src="/resources/oksdk.js")
+    body
+        script.
+            if (window.location.hash) {
+                var hash = OKSDK.Util.getRequestParameters(window.location.hash);
+                
+                if (!hash.access_token) window.opener.postMessage(JSON.stringify({ error: true }), "*");
+                else window.opener.postMessage(JSON.stringify({ token: hash.access_token }), "*");
+                window.close();
+            } else {
+                OKSDK.init({ app_id: 1246811648, app_key: 'CBAIOOMEEBABABABA' }, function () {}, function () {
+                    window.opener.postMessage(JSON.stringify({ error: true }), "*");
+                    window.close();
+                });
+            }

@@ -1,0 +1,41 @@
+template#profile-viewer
+
+    .profile-viewer(data-bind="css: { 'profile-viewer_shown': isShown }")
+        .profile-viewer__overlay(data-bind="css: { 'profile-viewer__overlay_shown': isShown }, click: hide")
+        .profile-viewer__sidebar.right-sidebar(data-bind="css: { 'right-sidebar_shown': isShown }")
+    
+            .profile-viewer__header Просмотр профиля
+                a.profile-viewer__close(data-bind="click: hide") ✕
+                
+            .profile-viewer__main
+                .profile-viewer__avatar(data-bind="style: { 'background-image': 'url('+(profile.photo.path ? profile.photo.path+'/s' : '/resources/images/default_avatar')+'.jpg)' }")
+                h1.profile-viewer__name(data-bind="text: profile.fio")
+                p.profile-viewer__date Дата регистрации:&nbsp;
+                    span(data-bind="date: profile.registerDate")
+                    | &nbsp;г.
+                
+            .profile-viewer__row
+                .icon.phone
+                .profile-viewer__row-key Номер телефона
+                .profile-viewer__row-value(data-bind="phone: profile.phone")
+            .profile-viewer__separator
+                    
+            .profile-viewer__row
+                .icon.email
+                .profile-viewer__row-key E-mail
+                .profile-viewer__row-value(data-bind="text: profile.email")
+            .profile-viewer__separator
+                    
+            .profile-viewer__row
+                .icon.viber
+                .profile-viewer__row-key Viber
+                .profile-viewer__row-value(data-bind="text: profile.viber ? 'Есть' : 'Нет'")
+            .profile-viewer__separator
+                    
+            .profile-viewer__row
+                .icon.whatsapp
+                .profile-viewer__row-key Whatsapp
+                .profile-viewer__row-value(data-bind="text: profile.whatsapp ? 'Есть' : 'Нет'")
+            
+            .profile-viewer__edit-button-container
+                button.green-convex-button(data-bind="click: edit") Редактировать

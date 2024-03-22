@@ -1,0 +1,374 @@
+template#add-object
+
+    form.add-object.right-sidebar.scrollable(data-bind="css: { 'right-sidebar_shown': $parent.page == 'ADD_OBJECT' || $parent.page == 'EDIT' }, scroll: 100")
+        .scrollable__container
+    
+            .add-object__header(data-bind="text: mode == 'ADD' ? 'Создать новое объявление' : 'Редактирование объявления'")
+                
+            .add-object__row
+                .icon.map
+                p.add-object__row-name Город
+                .add-object__row-container
+                    .search(name="city", data-bind="click: clearError, component: { name: 'search', params: { value: reObject.getObservableFor('city'), searchMethod: citiesService.searchCity.bind(citiesService) } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.city != ''
+            .add-object__error(data-bind="text: reObjectErrors.city")
+            // /ko
+        
+            // ko if: regions.length
+            .add-object__row
+                p.add-object__row-name Район
+                .add-object__row-container
+                    .selector.regions(data-bind="component: { name: 'selector', params: { value: reObject.getObservableFor('region') } }")
+                        li(value="") Любой
+                        // ko foreach: $parent.regions
+                        li(data-bind="text: $data, attr: { value: $data }")
+                        // /ko
+                    .vertical-aligner
+            // /ko
+        
+            .add-object__row
+                p.add-object__row-name Адрес
+                .add-object__row-container
+                    input(name="address", type="text", data-bind="click: clearError, textInput: reObject.address").add-object__row-container-input-text
+                    .vertical-aligner
+            // ko if: reObjectErrors.address != ''
+            .add-object__error(data-bind="text: reObjectErrors.address")
+            // /ko
+                
+                        
+            .add-object__separator
+            
+                
+            .add-object__row
+                .icon.operation
+                p.add-object__row-name Тип сделки
+                .add-object__row-container
+                    .selector(data-bind="component: { name: 'selector', params: { value: reObject.getObservableFor('operation') } }")
+                        li(value="RENT") Аренда
+                        li(value="SELL") Продажа
+                    .vertical-aligner
+            
+                        
+            .add-object__separator
+            
+                
+            .add-object__row
+                .icon.object
+                p.add-object__row-name Объект сделки
+                .add-object__row-container
+                    .selector(data-bind="component: { name: 'selector', params: { value: reObject.getObservableFor('object') } }")
+                        li(value="APARTMENT") Квартира
+                        li(value="HOUSE") Дом
+                        li(value="PARCEL") Участок
+                        li(value="INDUSTRIAL") Нежилое
+                    .vertical-aligner
+            
+                        
+            .add-object__separator
+            
+                
+            .add-object__row
+                .icon.area
+                p.add-object__row-name Общая площадь, м²
+                .add-object__row-container
+                    .input-number(name="sqmain", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('sqmain') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.sqmain != ''
+            .add-object__error(data-bind="text: reObjectErrors.sqmain")
+            // /ko
+            
+            // ko if: reObject.object == 'APARTMENT' || reObject.object == 'HOUSE'
+            .add-object__row
+                p.add-object__row-name Жилая площадь, м²
+                .add-object__row-container
+                    .input-number(name="sqliving", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('sqliving') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.sqliving != ''
+            .add-object__error(data-bind="text: reObjectErrors.sqliving")
+            // /ko
+                        
+            .add-object__row
+                p.add-object__row-name Площадь кухни, м²
+                .add-object__row-container
+                    .input-number(name="sqkitchen", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('sqkitchen') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.sqkitchen != ''
+            .add-object__error(data-bind="text: reObjectErrors.sqkitchen")
+            // /ko
+            // /ko
+            
+            // ko if: reObject.object == 'HOUSE'
+            .add-object__row
+                p.add-object__row-name Площадь участка, м²
+                .add-object__row-container
+                    .input-number(name="sqarea", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('sqarea') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.sqarea != ''
+            .add-object__error(data-bind="text: reObjectErrors.sqarea")
+            // /ko
+            // /ko
+                
+                
+            .add-object__separator
+                
+                    
+            .add-object__row
+                .icon.cost
+                p.add-object__row-name(data-bind="text: 'Цена,' + (reObject.operation == 'RENT' ? ' рублей/месяц' :' рублей')")
+                .add-object__row-container
+                    input(name="cost", type="text", data-bind="click: clearError, mask: { pattern: '9{1,9}', value: reObject.getObservableFor('cost') }").add-object__row-container-input-text
+                    .vertical-aligner
+            // ko if: reObjectErrors.cost != ''
+            .add-object__error(data-bind="text: reObjectErrors.cost")
+            // /ko
+                        
+                        
+            .add-object__separator
+            
+                    
+            // ko if: reObject.object == 'APARTMENT'
+            .add-object__row
+                .icon.floor
+                p.add-object__row-name Этаж
+                .add-object__row-container
+                    .input-number(name="floor", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('floor') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.floor != ''
+            .add-object__error(data-bind="text: reObjectErrors.floor")
+            // /ko
+            // /ko
+            
+            // ko if: reObject.object == 'APARTMENT' || reObject.object == 'HOUSE'
+            .add-object__row
+                p.add-object__row-name Этажность
+                .add-object__row-container
+                    .input-number(name="floors", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('floors') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.floors != ''
+            .add-object__error(data-bind="text: reObjectErrors.floors")
+            // /ko
+                        
+                        
+            .add-object__separator
+                
+                
+            .add-object__row
+                .icon.rooms
+                p.add-object__row-name Количество комнат
+                .add-object__row-container
+                    .input-number(name="rooms", data-bind="click: clearError, component: { name: 'input-number', params: { value: reObject.getObservableFor('rooms') } }")
+                    .vertical-aligner
+            // ko if: reObjectErrors.rooms != ''
+            .add-object__error(data-bind="text: reObjectErrors.rooms")
+            // /ko
+                        
+                        
+            .add-object__separator
+            // /ko
+            
+            // ko if: reObject.object == 'APARTMENT'
+            .add-object__row
+                .icon.type
+                p.add-object__row-name Тип дома
+                .add-object__row-container
+                    .selector(data-bind="component: { name: 'selector', params: { value: reObject.getObservableFor('type') } }")
+                        li(value="MONOLITH") Монолит
+                        li(value="MONOLITHBRICK") Монолит-кирпич
+                        li(value="PANEL") Панельный
+                        li(value="BLOCK") Блочный
+                        li(value="BRICK") Кирпичный
+                    .vertical-aligner
+                        
+                        
+            .add-object__separator
+            // /ko
+            
+            // ko if: reObject.object == 'INDUSTRIAL'
+            .add-object__row
+                .icon.type
+                p.add-object__row-name Тип нежилого
+                .add-object__row-container
+                    .selector(data-bind="component: { name: 'selector', params: { value: reObject.getObservableFor('industrialType') } }")
+                        li(value="OFFICE") Офис
+                        li(value="COMMERCIAL") Коммерческое
+                        li(value="STOCK") Склад
+                        li(value="MANUFACTURE") Производственное
+                        li(value="GARAGE") Гараж
+                        li(value="PARKING") Парковка
+                        li(value="HOTEL") Гостиница
+                        li(value="FREE") Сбодного назначения
+                    .vertical-aligner
+                        
+                        
+            .add-object__separator
+            // /ko
+                    
+            .add-object__row
+                .icon.additional
+                p.add-object__row-name Дополнительно
+            
+            // ko if: (reObject.object == 'APARTMENT' || reObject.object == 'HOUSE') && reObject.operation == 'SELL'
+            .add-object__row
+                p.add-object__row-name Ипотека
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.hypothec")
+                        .icon
+                    .vertical-aligner
+            // /ko
+            
+            // ko if: reObject.object == 'APARTMENT'
+            .add-object__row
+                p.add-object__row-name Лифт
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.lift")
+                        .icon
+                    .vertical-aligner
+            // /ko
+            
+            // ko if: reObject.object != 'PARCEL'
+            .add-object__row
+                p.add-object__row-name Парковка
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.parking")
+                        .icon
+                    .vertical-aligner
+            // /ko
+            
+            // ko if: (reObject.object == 'APARTMENT' || reObject.object == 'HOUSE') && reObject.operation == 'RENT'
+            .add-object__row
+                p.add-object__row-name Интернет
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.internet")
+                        .icon
+                    .vertical-aligner
+                        
+            .add-object__row
+                p.add-object__row-name Мебель
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.furniture")
+                        .icon
+                    .vertical-aligner
+                        
+            .add-object__row
+                p.add-object__row-name Бытовая техника
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.appliances")
+                        .icon
+                    .vertical-aligner
+            // /ko
+            
+            // ko if: reObject.object == 'PARCEL'
+            .add-object__row
+                p.add-object__row-name Вода
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.water")
+                        .icon
+                    .vertical-aligner
+                        
+            .add-object__row
+                p.add-object__row-name Газ
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.gas")
+                        .icon
+                    .vertical-aligner
+                        
+            .add-object__row
+                p.add-object__row-name Электричество
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.electricity")
+                        .icon
+                    .vertical-aligner
+                        
+            .add-object__row
+                p.add-object__row-name Канализация
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.canalization")
+                        .icon
+                    .vertical-aligner
+            // /ko
+            
+            // ko if: (reObject.object == 'APARTMENT' || reObject.object == 'HOUSE') && reObject.operation == 'SELL'
+            .add-object__row
+                p.add-object__row-name Ремонт
+                .add-object__row-container
+                    label.add-object__row-container-input-check
+                        input(type="checkbox", data-bind="checked: reObject.decor")
+                        .icon
+                    .vertical-aligner
+            // /ko
+                
+                
+            .add-object__separator
+                
+                        
+            .add-object__row
+                .icon.description
+                p.add-object__row-name Описание объекта
+            .add-object__row
+                .add-object__row-text
+                    textarea(name="description", data-bind="click: clearError, textInput: reObject.description")
+            // ko if: reObjectErrors.description != ''
+            .add-object__error(data-bind="text: reObjectErrors.description")
+            // /ko
+                
+                
+            .add-object__separator
+            
+                
+            .add-object__row
+                .icon.upload
+                p.add-object__row-name.add-object__row-name_blue Загрузить фото
+            .add-object__row
+                .object-file-upload(data-bind="component: 'object-file-upload'")
+                
+                
+            .add-object__separator
+            
+            
+            // ko if: !profile.token
+            .add-object__row
+                .icon.profile
+                p.add-object__row-name Ваше ФИО
+                .add-object__row-container
+                    input(name="fio", type="text", data-bind="click: clearError, textInput: reObject.fio").add-object__row-container-input-text
+                    .vertical-aligner
+            // ko if: reObjectErrors.fio != ''
+            .add-object__error(data-bind="text: reObjectErrors.fio")
+            // /ko
+        
+            .add-object__row
+                p.add-object__row-name Телефон
+                .add-object__row-container
+                    input(name="phone", type="text", data-bind="click: clearError, mask: { pattern: '+7 (999) 999-99-99', value: reObject.getObservableFor('phone') }").add-object__row-container-input-text
+                    .vertical-aligner
+            // ko if: reObjectErrors.phone != ''
+            .add-object__error(data-bind="text: reObjectErrors.phone")
+            // /ko
+                
+                
+            .add-object__separator
+            // /ko
+            
+                
+            .add-object__row.add-object__row_submit
+                // ko if: mode == 'ADD'
+                .input-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+                    input(type="submit", value="Добавить", data-bind="click: save").green-convex-button
+                    .loader(data-bind="visible: active")
+                // /ko
+                // ko if: mode == 'EDIT'
+                .input-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+                    input(type="submit", value="Сохранить", data-bind="click: update").green-convex-button
+                    .loader(data-bind="visible: active")
+                // /ko

@@ -1,0 +1,104 @@
+.photo-viewer {
+    background-color: rgba(0,0,0,0.5);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    &__photo-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 160px;
+    }
+    &__photo {
+        position: relative;
+        max-width: 70%;
+        max-height: 90%;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    &__left {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        
+        &:after {
+            display: block;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            line-height: 100px;
+            font-size: 30px;
+            color: #fff;
+            content: "〈";
+        }
+        &:active:after {
+            font-size: 28px;
+        }
+    }
+    &__slider-container {
+        position: absolute;
+        height: 160px;
+        bottom: 0;
+        width: 100%;
+
+        .slider {
+            display: inline-block;
+            vertical-align: middle;
+            height: 80px;
+            line-height: 80px;
+            font-size: 30px;
+            color: #fff;
+            width: 1160px;
+            text-align: left;
+
+            &__left, &__right {
+                text-align: center;
+                width: 80px;
+
+                &:active {
+                    font-size: 28px;
+                }
+            }
+            &__container {
+                left: 80px;
+                right: 80px;
+            }
+            &__photo {
+                width: 80px;
+                height: 80px;
+                margin: 0 10px;
+                background-size: cover;
+                background-position: center;
+
+                &_selected {
+                    border: 4px solid #fff;
+                }
+            }
+        }
+    }
+    &__close {
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        font-size: 30px;
+        cursor: pointer;
+        
+        &:active {
+            font-size: 28px;
+        }
+    }
+}

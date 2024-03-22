@@ -1,0 +1,49 @@
+template#my-objects
+
+    form.my-objects.objects-list.right-sidebar(data-bind="css: { 'right-sidebar_shown': $parent.page == 'MY_OBJECTS' || $parent.page == 'FAVORITES', 'objects-list_grid': mode == 'GRID' }")
+
+        .objects-list__header
+            label.objects-list__header-button
+                input(type="radio", name="mode", value="LIST", data-bind="checked: mode")
+                .objects-list__header-button-background
+                .icon.list
+            label.objects-list__header-button
+                input(type="radio", name="mode", value="GRID", data-bind="checked: mode")
+                .objects-list__header-button-background
+                .icon.grid
+            .objects-list__header-results Количество:&nbsp;&nbsp;
+                span(data-bind="text: count")
+
+        .my-objects__header(data-bind="text: $parent.page == 'FAVORITES' ? 'Избранное' : 'Мои объявления'")
+
+        .objects-list__results.scrollable(data-bind="scroll: 0, refreshScroll: refreshEventEmitter()")
+            .scrollable__container
+
+                .objects-list__results-wrapper
+                    // ko foreach: $parent.page == 'FAVORITES' ? favoritesCollection : myObjectsCollection
+                    a.objects-list__results-item(data-bind="attr: { href: $parents[1].page == 'FAVORITES' ? '/favorites/'+id : '/find/my/'+id }")
+                        .objects-list__results-item-date
+                            p(data-bind="visible: $parent.mode == 'LIST', text: '№' + id")
+                            p(data-bind="date: addDate")
+                        .objects-list__results-item-cover(data-bind="style: { 'background-image': 'url('+ (files[0] ? files[0].path + ($parent.mode == 'GRID' ? '/m' : '/s') : '/resources/images/default') + '.jpg)' }")
+                        .objects-list__results-item-info
+                            p
+                                span(data-bind="text: address")
+                                span.icon.address
+                            p
+                                span(data-bind="cost: cost + (operation == 'RENT' ? ' рублей/месяц' :' рублей')")
+                                span.icon.cost
+                            p
+                                span(data-bind="text: fio")
+                                span.icon.fio
+                            p
+                                span(data-bind="phone: phone")
+                                span.icon.phone
+                        .objects-list__results-item-additional
+                            p(data-bind="text: sqmain + ' м²'")
+                            p(data-bind="text: object == 'APARTMENT' ? 'Квартира' : object == 'HOUSE' ? 'Дом' : object == 'PARCEL' ? 'Участок' : 'Нежилое'")
+                            p(data-bind="text: operation == 'RENT' ? 'Аренда' : 'Продажа'")
+                    // /ko
+
+                    .objects-list__results-loader-container(data-bind="visible: active")
+                        .loader

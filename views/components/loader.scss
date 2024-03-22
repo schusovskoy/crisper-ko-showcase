@@ -1,0 +1,46 @@
+.loader {
+    display: block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 3px black;
+    
+    &:before, &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 60%;
+        height: 120%;
+        background-color: #fff;
+        top: -10%;
+        left: -8%;
+        @include transform-origin(100% 50%);
+        @include animation(load 2s infinite ease);
+    }
+    &:after {
+        left: 48%;
+        @include transform-origin(0 50%);
+        @include animation(load 2s infinite ease 1.5s);
+    }
+}
+
+@-webkit-keyframes load {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes load {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

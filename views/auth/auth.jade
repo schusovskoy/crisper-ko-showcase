@@ -1,0 +1,9 @@
+template#auth
+
+    .auth.popup(data-bind="css: { 'popup_shown': isShown }")
+        .popup__overlay(data-bind="click: hide")
+        .popup__dialog
+            form.signin(data-bind="css: { 'signin_shown': page == 'SIGNIN' }, component: 'signin'")
+            form.signup(data-bind="css: { 'signup_shown': page == 'SIGNUP' }, component: 'signup'")
+            .vertical-aligner
+        .vertical-aligner

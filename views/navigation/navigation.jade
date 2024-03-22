@@ -1,0 +1,71 @@
+template#navigation
+
+    header.navigation(data-bind="css: { 'navigation_minimized': page != 'START' }")
+        .navigation__logo
+            .icon
+            .vertical-aligner
+        a.navigation__min-logo(href="/")
+            .icon
+            .vertical-aligner
+        ul.navigation__links
+        .navigation__cabinet
+            a.green-convex-button(href="/add") +&nbsp;&nbsp;Объявление
+            // ko if: !profile.token
+            .icon
+            span(data-bind="click: showAuth") Войти
+            // /ko
+            // ko if: profile.token
+            tooltip.tooltip(params="width: 250")
+                .avatar(data-bind="style: { 'background-image': 'url('+($parent.profile.photo.path ? $parent.profile.photo.path+'/s' : '/resources/images/default_avatar')+'.jpg)' }")
+                .tooltip__container
+                    a.navigation__avatar(data-bind="click: $parent.showProfile.bind($parent), style: { 'background-image': 'url('+($parent.profile.photo.path ? $parent.profile.photo.path+'/s' : '/resources/images/default_avatar')+'.jpg)' }")
+                    p.navigation__username(data-bind="text: $parent.profile.fio")
+                    .navigation__tooltip-separator
+                    a.navigation__tooltip-button(href="/find/my") Мои объявления
+                        .icon.my-listings
+                    a.navigation__tooltip-button(data-bind="click: $parent.showRequests.bind($parent)") Мои подписки
+                        .icon.my-requests
+                    a.navigation__tooltip-button(href="/favorites") Избранное
+                        .icon.favorites
+                    .navigation__tooltip-separator
+                    a.navigation__tooltip-button(data-bind="click: $parent.logout.bind($parent)") Выйти
+                        .icon.logout
+            .navigation__cabinet-name(data-bind="text: fio()")
+            // /ko
+            .vertical-aligner
+        
+                
+    // ko component: 'map'
+    // /ko
+    // ko component: 'start'
+    // /ko
+    // ko component: 'objects-list'
+    // /ko
+    // ko component: 'my-objects'
+    // /ko
+    // ko component: 'add-object'
+    // /ko
+    // ko component: 'objects-filter'
+    // /ko
+    // ko component: 'object-viewer'
+    // /ko
+    a.find-button(href="/find", data-bind="visible: page != 'START'")
+        .icon
+        
+    
+    // ko component: 'requests-list'
+    // /ko
+    // ko component: 'profile-viewer'
+    // /ko
+    // ko component: 'edit-profile'
+    // /ko
+    // ko component: 'photo-viewer'
+    // /ko
+    // ko component: 'auth'
+    // /ko
+    // ko component: 'remind'
+    // /ko
+    // ko component: 'social-extra'
+    // /ko
+    // ko component: 'alert'
+    // /ko

@@ -1,0 +1,46 @@
+.content-slider {
+    position: relative;
+    display: block;
+
+    &__left, &__right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        text-align: right;
+        cursor: pointer;
+
+        &:active {
+            opacity: 0.8;
+        }
+        &:after {
+            content: "〈";
+        }
+    }
+    &__right {
+        left: auto;
+        right: 0;
+        text-align: left;
+
+        &:after {
+            content: "〉";
+        }
+    }
+    &__container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        white-space: nowrap;
+
+        &-scroller {
+            @include transition-property(transform);
+            @include transition-duration(500ms);
+            @include transition-timing-function(ease-in-out);
+        }
+    }
+    &__item {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

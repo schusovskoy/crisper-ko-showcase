@@ -1,0 +1,17 @@
+template#signin
+
+    .input-container
+        input.popup__dialog-input(type="text", placeholder="E-mail/Телефон без 8", data-bind="textInput: signinCredentials.email")
+        .icon.at
+    br
+    .input-container
+        input.popup__dialog-input(type="password", placeholder="Пароль", data-bind="textInput: signinCredentials.password")
+        .icon.lock
+        a.signin__remind(data-bind="click: showRemind") Забыли?
+    br
+    .input-container.popup__dialog-button-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+        input.popup__dialog-green-button(type="submit", value="Войти", data-bind="click: signin, attr: { disabled: active }")
+        .loader(data-bind="visible: active")
+    br
+    button.popup__dialog-blue-button(data-bind="click: showSignup") Зарегистрироваться
+    .social(data-bind="component: 'social'")

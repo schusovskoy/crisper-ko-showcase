@@ -1,0 +1,13 @@
+template#alert
+
+    .alert.popup(data-bind="css: { 'popup_shown': isShown }")
+        .popup__overlay(data-bind="click: cancel")
+        .popup__dialog
+            .alert__header(data-bind="text: header")
+            .alert__text(data-bind="text: text")
+            button.popup__dialog-green-button(data-bind="click: ok") OK
+            // ko if: showCancel
+            br
+            button.popup__dialog-blue-button(data-bind="click: cancel") Отмена
+            // /ko
+        .vertical-aligner

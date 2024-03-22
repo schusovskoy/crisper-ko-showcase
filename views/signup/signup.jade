@@ -1,0 +1,34 @@
+template#signup
+
+    .input-container
+        input.popup__dialog-input(name="email", type="text", placeholder="E-mail", data-bind="textInput: signupCredentials.email, event: { focus: clearError }")
+        .icon.at
+    br
+    p(data-bind="text: signupErrors.email")
+    br
+    .input-container
+        input.popup__dialog-input(name="phone", type="text", placeholder="Телефон", data-bind="mask: { pattern: '8 (999) 999-99-99', value: signupCredentials.getObservableFor('phone') }, event: { focus: clearError }")
+        .icon.phone
+    br
+    p(data-bind="text: signupErrors.phone")
+    br
+    .input-container
+        input.popup__dialog-input(name="fio", type="text", placeholder="Имя", data-bind="textInput: signupCredentials.fio, event: { focus: clearError }")
+        .icon.fio
+    br
+    p(data-bind="text: signupErrors.fio")
+    br
+    .input-container.popup__dialog-password-container
+        input.popup__dialog-input.popup__dialog-password(name="password", type="password", placeholder="Пароль", data-bind="textInput: signupCredentials.password, event: { focus: clearError }")
+        br
+        input.popup__dialog-input.popup__dialog-repeat(name="password", type="password", placeholder="Повторите пароль", data-bind="textInput: signupCredentials.second, event: { focus: clearError }")
+        .popup__dialog-line
+        .icon.lock
+    br
+    p(data-bind="text: signupErrors.password")
+    br
+    .input-container.popup__dialog-button-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+        input.popup__dialog-green-button(type="submit", value="Зарегистрироваться", data-bind="click: signup, attr: { disabled: active }")
+        .loader(data-bind="visible: active")
+    br
+    span(data-bind="click: showSignin") Я уже зарегистрирован

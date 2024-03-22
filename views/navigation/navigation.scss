@@ -1,0 +1,233 @@
+.navigation {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(49,53,57,0.8);
+    @include transition-property(height, background-color);
+    @include transition-duration(500ms);
+    @include transition-timing-function(ease-in-out);
+
+    &_minimized {
+        height: 50px;
+        background-color: $blue;
+    }
+    &__logo {
+        text-align: right;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        padding-right: 350px;
+        @include transition-property(opacity);
+        @include transition-duration(500ms);
+        @include transition-timing-function(ease-in-out);
+
+        & > .icon {
+            @include sprite($ic_main_logo_full, inline-block);
+            vertical-align: middle;
+            @include transition-property(transform);
+            @include transition-duration(500ms);
+            @include transition-timing-function(ease-in-out);
+            
+            .navigation_minimized & {
+                @include transform(translateX(-50%));
+            }
+        }
+        .navigation_minimized & {
+            opacity: 0;
+        }
+    }
+    &__min-logo {
+        position: absolute;
+        width: 250px;
+        height: 100%;
+        opacity: 0;
+        text-align: center;
+        cursor: pointer;
+        @include transition(opacity 500ms ease-in-out);
+        
+        & > .icon {
+            @include sprite($ic_main_logo, inline-block);
+            vertical-align: middle;
+        }
+        .navigation_minimized & {
+            opacity: 1;
+        }
+    }
+    &__links {
+        opacity: 0;
+        line-height: 100px;
+        text-align: left;
+        @include transition-property(padding, line-height, opacity);
+        @include transition-duration(500ms);
+        @include transition-timing-function(ease-in-out);
+
+        & > li {
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            display: inline-block;
+            margin: 0 25px;
+            font-weight: 600;
+            
+            & > a {
+                color: #fff;
+                text-decoration: none;
+                
+                &:active {
+                    font-size: 13.5px;
+                }
+            }
+        }
+        .navigation_minimized & {
+            z-index: 1;
+            opacity: 1;
+            line-height: 50px;
+            padding-left: 250px;
+            padding-right: 450px;
+        }
+    }
+    &__cabinet {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        padding-left: 350px;
+        @include transition-property(width, padding);
+        @include transition-duration(500ms);
+        @include transition-timing-function(ease-in-out);
+
+        & > .green-convex-button {
+            display: inline-block;
+            line-height: 40px;
+            text-decoration: none;
+            z-index: 1;
+        }
+        & > .icon {
+            @include sprite($ic_main_cabinet, inline-block);
+            margin: 0 20px;
+            vertical-align: middle;
+        }
+        & > span {
+            text-decoration: underline;
+            cursor: pointer;
+            color: white;
+            font-weight: normal;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+        &-name {
+            display: inline-block;
+            vertical-align: middle;
+            color: #fff;
+        }
+        .navigation_minimized & {
+            width: 450px;
+            padding-left: 0;
+        }
+    }
+    .tooltip {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        width: 50px;
+        margin: 0 20px;
+        
+        &__button {
+            position: relative;
+            
+            .avatar {
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                background-position: center;
+                background-size: cover;
+                border: solid 1px #fff;
+                border-radius: 50%;
+            }
+        }
+        input:checked + .tooltip__button {
+            background-color: rgba(0,0,0,0.2);
+        }
+        input:hover + .tooltip__button .avatar {
+            @include filter(blur(1px));
+        }
+        &__container {
+            text-align: center;
+            width: 250px;
+            padding: 20px;
+            background-color: $blue;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0,0,0,0.8);
+        }
+        &__arrow {
+            background-color: $blue;
+        }
+    }
+    &__avatar {
+        position: relative;
+        display: inline-block;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        border: solid 2px #fff;
+        margin: 30px 0 0 0;
+        background-size: cover;
+        background-position: center;
+        
+        &:after {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            content: "";
+            @extend .icon;
+            @include sprite($ic_edit);
+        }
+    }
+    &__username {
+        margin: 20px 0;
+        color: #fff;
+        font-weight: 500;
+    }
+    &__tooltip {
+        &-separator {
+            margin: 20px 0;
+            height: 1px;
+            background-color: #fff;
+        }
+        &-button {
+            position: relative;
+            padding: 0 0 0 40px;
+            text-align: left;
+            color: #fff;
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            text-decoration: none;
+            
+            .icon {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                
+                &.my-listings { @include sprite($ic_mylistings); }
+                &.my-requests { @include sprite($ic_requests); }
+                &.favorites { @include sprite($ic_favorites); }
+                &.logout {
+                    margin: auto auto auto 5px;
+                    @include sprite($ic_logout);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.search {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    
+    &__results {
+        position: absolute;
+        top: 100%;
+        z-index: 999;
+        width: 100%;
+        display: none;
+        
+        &:active {
+            display: block;
+        }
+    }
+    &__input:focus + &__results {
+        display: block;
+    }
+}

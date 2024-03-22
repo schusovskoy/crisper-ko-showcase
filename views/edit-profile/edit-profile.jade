@@ -1,0 +1,59 @@
+template#edit-profile
+
+    .edit-profile(data-bind="css: { 'edit-profile_shown': isShown }")
+        .edit-profile__overlay(data-bind="css: { 'edit-profile__overlay_shown': isShown }, click: hide")
+        form.edit-profile__sidebar.right-sidebar(data-bind="css: { 'right-sidebar_shown': isShown }")
+
+            .edit-profile__header Редактирование профиля
+                a.edit-profile__close(data-bind="click: hide") ✕
+                
+            label.edit-profile__avatar(data-bind="style: { 'background-image': 'url('+editableUser.photo.tmpPath+')' }")
+                .edit-profile__avatar-progress(data-bind="style: { width: ((1-editableUser.photo.progress) * 100) + '%' }")
+                input(type="file", data-bind="event: { 'change': upload }")
+                
+            .edit-profile__row
+                .edit-profile__row-key ФИО
+                .edit-profile__row-container
+                    input(type="text", name="fio", data-bind="textInput: editableUser.fio, event: { focus: clearError }")
+                    .vertical-aligner
+            .edit-profile__error(data-bind="text: profileErrors.fio")
+                        
+            .edit-profile__row
+                .edit-profile__row-key Номер телефона
+                .edit-profile__row-container
+                    input(type="text", name="phone", data-bind="mask: { pattern: '+7 (999) 999-99-99', value: editableUser.getObservableFor('phone') }, event: { focus: clearError }")
+                    .vertical-aligner
+            .edit-profile__error(data-bind="text: profileErrors.phone")
+                        
+            .edit-profile__row
+                .edit-profile__row-key Новый пароль
+                .edit-profile__row-container
+                    input(type="password", name="password", data-bind="textInput: editableUser.password, event: { focus: clearError }")
+                    .vertical-aligner
+                        
+            .edit-profile__row
+                .edit-profile__row-key Подтверждение пароля
+                .edit-profile__row-container
+                    input(type="password", name="password", data-bind="textInput: editableUser.second, event: { focus: clearError }")
+                    .vertical-aligner
+            .edit-profile__error(data-bind="text: profileErrors.password")
+                        
+            .edit-profile__row
+                .edit-profile__row-key Viber
+                .edit-profile__row-container
+                    label.edit-profile__row-checkbox
+                        input(type="checkbox", data-bind="checked: editableUser.viber")
+                        .icon
+                    .vertical-aligner
+                        
+            .edit-profile__row
+                .edit-profile__row-key Whatsapp
+                .edit-profile__row-container
+                    label.edit-profile__row-checkbox
+                        input(type="checkbox", data-bind="checked: editableUser.whatsapp")
+                        .icon
+                    .vertical-aligner
+            
+            .input-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+                button.green-convex-button(data-bind="click: save") Сохранить
+                .loader(data-bind="visible: active")

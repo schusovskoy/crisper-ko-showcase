@@ -1,0 +1,14 @@
+template#remind
+
+    .remind.popup(data-bind="css: { 'popup_shown': isShown }")
+        .popup__overlay(data-bind="click: hide")
+        form.popup__dialog(data-bind="submit: remind")
+            p Код для восстановления пароля будет выслан вам на почту
+            .input-container
+                input.popup__dialog-input(type="text", placeholder="E-mail", data-bind="textInput: signinCredentials.email")
+                .icon.at
+            br
+            .input-container.popup__dialog-button-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+                input.popup__dialog-green-button(type="submit", value="Отправить", data-bind="attr: { disabled: active }")
+                .loader(data-bind="visible: active")
+        .vertical-aligner

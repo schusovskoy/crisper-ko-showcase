@@ -1,0 +1,283 @@
+template#objects-filter
+
+    .objects-filter.left-sidebar(data-bind="css: { 'left-sidebar_shown': $parent.page == 'OBJECTS_LIST' }")
+        
+        a.objects-filter__header(href="/")
+            .icon
+                
+        form.objects-filter__container.scrollable(data-bind="scroll: 100")
+            .scrollable__container
+
+                label.objects-filter__operation
+                    input(type="radio", name="operation", value="SELL", data-bind="checked: reObjectRequest.operation")
+                    span Продажа
+                label.objects-filter__operation
+                    input(type="radio", name="operation", value="RENT", data-bind="checked: reObjectRequest.operation")
+                    span Аренда
+                
+                .search(data-bind="component: { name: 'search', params: { placeholder: 'Город', value: reObjectRequest.getObservableFor('city'), searchMethod: citiesService.searchCity.bind(citiesService) } }")
+                
+                // ko if: regions.length
+                .objects-filter__group
+                    .icon.mapicon
+                    input(type="checkbox")
+                    .objects-filter__group-name Район
+                    .objects-filter__group-items
+                        label.objects-filter__radio
+                            input(type="radio", value="", data-bind="checked: reObjectRequest.region")
+                            .icon
+                            | Любой
+                        // ko foreach: regions
+                        label.objects-filter__radio
+                            input(type="radio", data-bind="attr: { value: $data }, checked: $parent.reObjectRequest.region")
+                            .icon
+                            // ko text: $data
+                            // /ko
+                        // /ko
+                // /ko
+                    
+                .objects-filter__group
+                    .icon.object
+                    input(type="checkbox")
+                    .objects-filter__group-name Объект
+                    .objects-filter__group-items
+                        label.objects-filter__radio
+                            input(type="radio", value="APARTMENT", data-bind="checked: reObjectRequest.object")
+                            .icon
+                            | Квартира
+                        label.objects-filter__radio
+                            input(type="radio", value="HOUSE", data-bind="checked: reObjectRequest.object")
+                            .icon
+                            | Дом
+                        label.objects-filter__radio
+                            input(type="radio", value="PARCEL", data-bind="checked: reObjectRequest.object")
+                            .icon
+                            | Участок
+                        label.objects-filter__radio
+                            input(type="radio", value="INDUSTRIAL", data-bind="checked: reObjectRequest.object")
+                            .icon
+                            | Нежилое
+                        
+                // ko if: reObjectRequest.object == 'APARTMENT' || reObjectRequest.object == 'HOUSE'
+                .objects-filter__group
+                    .icon.rooms
+                    input(type="checkbox")
+                    .objects-filter__group-name Комнаты
+                    .objects-filter__group-items
+                        label.objects-filter__radio
+                            input(type="radio", value="", data-bind="checked: reObjectRequest.roomsFrom")
+                            .icon
+                            | от 1
+                        label.objects-filter__radio
+                            input(type="radio", value="2", data-bind="checked: reObjectRequest.roomsFrom")
+                            .icon
+                            | от 2
+                        label.objects-filter__radio
+                            input(type="radio", value="3", data-bind="checked: reObjectRequest.roomsFrom")
+                            .icon
+                            | от 3
+                        label.objects-filter__radio
+                            input(type="radio", value="4", data-bind="checked: reObjectRequest.roomsFrom")
+                            .icon
+                            | 4 и более
+                // /ko
+                    
+                .objects-filter__group
+                    .icon.cost
+                    input(type="checkbox")
+                    .objects-filter__group-name Цена
+                    .objects-filter__group-items
+                        label.objects-filter__single-input
+                            span &nbsp;&nbsp;&nbsp;От
+                            input(type="text", data-bind="textInput: reObjectRequest.costFrom, attr: { placeholder: reObjectRequest.operation == 'RENT' ? 'рублей/месяц' : 'рублей' }")
+                            .vertical-aligner
+                        label.objects-filter__single-input
+                            span &nbsp;&nbsp;&nbsp;До
+                            input(type="text", data-bind="textInput: reObjectRequest.costTo, attr: { placeholder: reObjectRequest.operation == 'RENT' ? 'рублей/месяц' : 'рублей' }")
+                            .vertical-aligner
+                                
+                // ko if: reObjectRequest.object == 'APARTMENT'
+                .objects-filter__group
+                    .icon.type
+                    input(type="checkbox")
+                    .objects-filter__group-name Тип дома
+                    .objects-filter__group-items
+                        label.objects-filter__radio
+                            input(type="radio", value="MONOLITH,MONOLITHBRICK,PANEL,BLOCK,BRICK", data-bind="checked: reObjectRequest.type")
+                            .icon
+                            | Любой
+                        label.objects-filter__radio
+                            input(type="radio", value="MONOLITH", data-bind="checked: reObjectRequest.type")
+                            .icon
+                            | Монолит
+                        label.objects-filter__radio
+                            input(type="radio", value="MONOLITHBRICK", data-bind="checked: reObjectRequest.type")
+                            .icon
+                            | Монолит-кирпич
+                        label.objects-filter__radio
+                            input(type="radio", value="PANEL", data-bind="checked: reObjectRequest.type")
+                            .icon
+                            | Панельный
+                        label.objects-filter__radio
+                            input(type="radio", value="BLOCK", data-bind="checked: reObjectRequest.type")
+                            .icon
+                            | Блочный
+                        label.objects-filter__radio
+                            input(type="radio", value="BRICK", data-bind="checked: reObjectRequest.type")
+                            .icon
+                            | Кирпичный
+                // /ko
+                        
+                .objects-filter__group
+                    .icon.square
+                    input(type="checkbox")
+                    .objects-filter__group-name Площадь
+                    .objects-filter__group-items
+                        label.objects-filter__single-input
+                            span Общая
+                            input(type="text", placeholder="м²", data-bind="textInput: reObjectRequest.sqmainFrom")
+                            .vertical-aligner
+                        // ko if: reObjectRequest.object == 'APARTMENT' || reObjectRequest.object == 'HOUSE'
+                        label.objects-filter__single-input
+                            span Жилая
+                            input(type="text", placeholder="м²", data-bind="textInput: reObjectRequest.sqlivingFrom")
+                            .vertical-aligner
+                        label.objects-filter__single-input
+                            span Кухни
+                            input(type="text", placeholder="м²", data-bind="textInput: reObjectRequest.sqkitchenFrom")
+                            .vertical-aligner
+                        // /ko
+                        // ko if: reObjectRequest.object == 'HOUSE'
+                        label.objects-filter__single-input
+                            span Участка
+                            input(type="text", placeholder="м²", data-bind="textInput: reObjectRequest.sqareaFrom")
+                            .vertical-aligner
+                        // /ko
+                
+                // ko if: reObjectRequest.object == 'APARTMENT'
+                .objects-filter__group
+                    .icon.floor
+                    input(type="checkbox")
+                    .objects-filter__group-name Этаж
+                    .objects-filter__group-items
+                        .objects-filter__multiple-input
+                            .objects-filter__multiple-input-container
+                                | От
+                                input(type="text", data-bind="textInput: reObjectRequest.floorFrom")
+                                | До
+                                input(type="text", data-bind="textInput: reObjectRequest.floorTo")
+                // /ko
+                     
+                // ko if: reObjectRequest.object == 'INDUSTRIAL'
+                .objects-filter__group
+                    .icon.type
+                    input(type="checkbox")
+                    .objects-filter__group-name Тип нежилого
+                    .objects-filter__group-items
+                        label.objects-filter__radio
+                            input(type="radio", value="OFFICE,COMMERCIAL,STOCK,MANUFACTURE,GARAGE,PARKING,HOTEL,FREE", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Любой
+                        label.objects-filter__radio
+                            input(type="radio", value="OFFICE", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Офис
+                        label.objects-filter__radio
+                            input(type="radio", value="COMMERCIAL", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Комерческое
+                        label.objects-filter__radio
+                            input(type="radio", value="STOCK", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Склад
+                        label.objects-filter__radio
+                            input(type="radio", value="MANUFACTURE", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Производственное
+                        label.objects-filter__radio
+                            input(type="radio", value="GARAGE", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Гараж
+                        label.objects-filter__radio
+                            input(type="radio", value="PARKING", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Парковка
+                        label.objects-filter__radio
+                            input(type="radio", value="HOTEL", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Гостиница
+                        label.objects-filter__radio
+                            input(type="radio", value="FREE", data-bind="checked: reObjectRequest.industrialType")
+                            .icon
+                            | Свободного назначения
+                // /ko
+                
+                .objects-filter__group
+                    .icon.additional
+                    input(type="checkbox")
+                    .objects-filter__group-name Дополнительно
+                    .objects-filter__group-items
+                        // ko if: (reObjectRequest.object == 'APARTMENT' || reObjectRequest.object == 'HOUSE') && reObjectRequest.operation == 'RENT'
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.internet")
+                            .icon
+                            | Интернет
+                        // /ko
+                        // ko if: (reObjectRequest.object == 'APARTMENT' || reObjectRequest.object == 'HOUSE') && reObjectRequest.operation == 'SELL'
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.decor")
+                            .icon
+                            | Ремонт
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.hypothec")
+                            .icon
+                            | Ипотека
+                        // /ko
+                        // ko if: (reObjectRequest.object == 'APARTMENT' || reObjectRequest.object == 'HOUSE') && reObjectRequest.operation == 'RENT'
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.furniture")
+                            .icon
+                            | Мебель
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.appliances")
+                            .icon
+                            | Бытовая техника
+                        // /ko
+                        // ko if: reObjectRequest.object == 'APARTMENT' && reObjectRequest.operation == 'SELL'
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.lift")
+                            .icon
+                            | Лифт
+                        // /ko
+                        // ko if: reObjectRequest.object == 'PARCEL'
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.gas")
+                            .icon
+                            | Газ
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.canalization")
+                            .icon
+                            | Канализация
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.water")
+                            .icon
+                            | Вода
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.electricity")
+                            .icon
+                            | Электричество
+                        // /ko
+                        // ko if: reObjectRequest.object != 'PARCEL'
+                        label.objects-filter__checkbox
+                            input(type="checkbox", data-bind="checked: reObjectRequest.parking")
+                            .icon
+                            | Парковка
+                        // /ko
+                        
+                .objects-filter__clear
+                    button.blue-convex-button(data-bind="click: clear") Сбросить
+                    // ko if: profile.token
+                    .input-container(data-bind="style: { opacity: active ? 0.8 : 1 }")
+                        button.green-convex-button(data-bind="click: save") Создать подписку
+                        .loader(data-bind="visible: active")
+                    // /ko

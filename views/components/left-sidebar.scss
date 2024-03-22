@@ -1,0 +1,15 @@
+.left-sidebar {
+    position: absolute;
+    width: 250px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    @include transform(translateX(-100%));
+    @include transition-property(transform);
+    @include transition-duration(500ms);
+    @include transition-timing-function(ease-in-out);
+
+    &_shown {
+        @include transform(translateX(0));
+    }
+}

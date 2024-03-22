@@ -1,0 +1,9 @@
+template#content-slider
+    
+    .content-slider__left(data-bind="click: left")
+    .content-slider__container
+        .content-slider__container-scroller(data-bind="style: { 'transform': '-moz-translateX('+position()+'px)', '-webkit-transform': 'translateX('+position()+'px)', '-ms-transform': 'translateX('+position()+'px)', '-o-transform': 'translateX('+position()+'px)', 'transform': 'translateX('+position()+'px)' }")
+            // ko template: { nodes: $componentTemplateNodes }
+            // /ko
+            .vertical-aligner
+    .content-slider__right(data-bind="click: right")

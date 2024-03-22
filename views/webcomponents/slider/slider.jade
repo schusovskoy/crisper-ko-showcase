@@ -1,0 +1,10 @@
+template#slider
+
+    .slider__left(data-bind="click: left")
+    .slider__container
+        .slider__container-scroller(data-bind="style: { 'transform': '-moz-translateX('+position()+'px)', '-webkit-transform': 'translateX('+position()+'px)', '-ms-transform': 'translateX('+position()+'px)', '-o-transform': 'translateX('+position()+'px)', 'transform': 'translateX('+position()+'px)' }")
+            // ko foreach: photos
+            .slider__photo(data-bind="style: { 'background-image': 'url('+$data+')' }, click: $parent.select.bind($parent, $data), css: { 'slider__photo_selected': $data == $parent.selected() }")
+            // /ko
+            .vertical-aligner
+    .slider__right(data-bind="click: right")

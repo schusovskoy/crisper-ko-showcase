@@ -1,0 +1,5 @@
+template#search
+
+    input(type="text", data-bind="textInput: value, event: { input: search, keydown: select }, attr: { placeholder: placeholder }").search__input
+    ul(data-bind="foreach: results").search__results
+        li(data-bind="text: $data, css: { 'search__results-item_selected': $index() == $parent.selected() }, click: $parent.choose.bind($parent)").search__results-item

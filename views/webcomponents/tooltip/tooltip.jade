@@ -1,0 +1,7 @@
+template#tooltip
+
+    input(type="checkbox", data-bind="checked: isOpen")
+    .tooltip__button(data-bind="template: { nodes: [$componentTemplateNodes[0]] }")
+    // ko template: { nodes: [$componentTemplateNodes[1]] }
+    // /ko
+    .tooltip__arrow

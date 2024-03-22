@@ -1,0 +1,273 @@
+.objects-filter {
+    z-index: 1;
+    
+    &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 4px;
+        content: "";
+        display: block;
+        background-color: rgba(0,0,0,0.3);
+    }
+    &__header {
+        display: block;
+        height: 50px;
+        background-color: $mid-blue;
+        position: relative;
+        cursor: pointer;
+        
+        & > .icon {
+            @include sprite($ic_main_logo);
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+        }
+        &:active {
+            opacity: initial;
+        }
+    }
+    &__container {
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        width: 100%;
+        background-color: $dark-grey;
+        overflow: hidden;
+    }
+    &__operation {
+        display: inline-block;
+        width: 50%;
+        cursor: pointer;
+
+        span {
+            display: block;
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+            background-color: $black-grey;
+        }
+        input:checked + span {
+            background-color: $dark-grey;
+
+            &:after {
+                content: "";
+                position: absolute;
+                width: 25px;
+                height: 100%;
+                top: 0;
+                right: -9px;
+                z-index: 1;
+                background-color: $dark-grey;
+                @include transform(skewX(16.6992deg));
+            }
+        }
+        & + & input:checked + span:after {
+            right: auto;
+            left: -9px;
+            @include transform(skewX(-16.6992deg));
+        }
+    }
+    .search {
+        margin: 20px 20px;
+        
+        input {
+            width: 210px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.3);
+            padding: 0 20px;
+            font-size: 14px;
+            color: #fff;
+
+            &:focus {
+                background-color: $warm-grey;
+                color: #000;
+            }
+        }
+        &__results {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0,0,0,0.5);
+            margin-top: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            overflow: hidden;
+            cursor: pointer;
+
+            &-item {
+                line-height: normal;
+                padding: 5px 20px;
+
+                &_selected {
+                    background-color: $warm-grey;
+                }
+                &:hover {
+                    background-color: $warm-grey;
+                }
+            }
+        }
+    }
+    &__group {
+        position: relative;
+        color: #fff;
+        font-size: 14px;
+        line-height: 40px;
+
+        & > input {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            opacity: 0;
+            cursor: pointer;
+
+            &:checked + .objects-filter__group-name {
+                background-color: rgba(255,255,255,0.3);
+
+                & + .objects-filter__group-items {
+                    display: block;
+                }
+            }
+        }
+        &-name {
+            padding-left: 75px;
+        }
+        &-items {
+            display: none;
+            padding: 5px 0;
+        }
+        & > .icon {
+            position: absolute;
+            top: 7px;
+            left: 25px;
+            &.object {@include sprite($ic_find_object);}
+            &.mapicon {@include sprite($ic_find_map);}
+            &.square {@include sprite($ic_find_sq);}
+            &.cost {@include sprite($ic_find_cost_list);}
+            &.floor {@include sprite($ic_find_floor);}
+            &.rooms {@include sprite($ic_find_rooms);}
+            &.type {@include sprite($ic_find_type);}
+            &.additional {@include sprite($ic_find_additional);}
+        }
+    }
+    &__radio {
+        display: block;
+        position: relative;
+        padding-left: 75px;
+        cursor: pointer;
+
+        .icon {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 32px;
+            margin: auto;
+            @include sprite($ic_radio);
+        }
+        input:checked + .icon { @include sprite($ic_radio_checked); }
+    }
+    &__checkbox {
+        display: block;
+        position: relative;
+        padding-left: 75px;
+        cursor: pointer;
+
+        .icon {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 32px;
+            margin: auto;
+            @include sprite($ic_checkbox);
+        }
+        input:checked + .icon { @include sprite($ic_checkbox_checked); }
+    }
+    &__single-input {
+        position: relative;
+        display: block;
+        height: 40px;
+
+        span {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 15px;
+        }
+        input {
+            margin-left: 75px;
+            width: 160px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.3);
+            padding: 0 20px;
+            font-size: 14px;
+            color: #fff;
+
+            &:focus {
+                background-color: $warm-grey;
+                color: #000;
+            }
+        }
+    }
+    &__multiple-input {
+        &-header {
+            padding-left: 40px;
+        }
+        &-container {
+            padding-left: 40px;
+            
+            input {
+                width: 50px;
+                height: 30px;
+                padding: 0 5px;
+                border-radius: 5px;
+                background-color: rgba(255,255,255,0.3);
+                text-align: center;
+                font-size: 14px;
+                color: #fff;
+                margin: 0 18px;
+
+                &:focus {
+                    background-color: $warm-grey;
+                    color: #000;
+                }
+            }
+        }
+    }
+    &__clear {
+        text-align: center;
+        padding: 20px 0;
+        
+        .green-convex-button,
+        .blue-convex-button {
+            width: 210px;
+        }
+        .input-container {
+            margin: 20px 0 0 0;
+            
+            .loader {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                box-shadow: inset 0 0 0 2px #fff;
+                top: 0;
+                bottom: 0;
+                right: 10px;
+                margin: auto;
+                
+                &:before, &:after {
+                    background-color: $green;
+                }
+            }
+        }
+    }
+}

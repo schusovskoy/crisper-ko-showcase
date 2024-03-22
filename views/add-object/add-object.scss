@@ -1,0 +1,225 @@
+.add-object {
+    overflow: hidden;
+    
+    &__header {
+        padding-top: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: normal;
+        background-color: $mid-grey;
+        margin-bottom: 20px;
+    }
+    &__row {
+        position: relative;
+        line-height: 50px;
+        
+        &_submit {
+            text-align: center;
+            padding: 50px 0;
+            
+            .green-convex-button {
+                padding: 0 100px;
+            }
+            .loader {
+                position: absolute;
+                right: 10px;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                width: 20px;
+                height: 20px;
+                box-shadow: inset 0 0 0 2px #fff;
+                
+                &:before, &:after {
+                    background-color: $green;
+                }
+            }
+        }
+        &-name {
+            margin: 0;
+            font-size: 14px;
+            font-weight: normal;
+            padding-left: 60px;
+            
+            &_blue {
+                color: $blue;
+                font-weight: 600;
+            }
+        }
+        &-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            padding-right: 20px;
+            
+            .search {
+                &__input {
+                    background-color: $grey;
+                    width: 180px;
+                    height: 30px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    font-weight: normal;
+                    padding: 0 20px;
+
+                    &:focus {
+                        background-color: #fff;
+                        border: 2px solid $blue;
+                        color: $blue;
+                    }
+                }
+                &__results {
+                    background-color: #fff;
+                    line-height: normal;
+                    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+                    font-size: 14px;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    font-weight: bold;
+                    
+                    &-item {
+                        padding: 5px 10px;
+                        cursor: pointer;
+                        
+                        &:hover {
+                            background-color: $grey;
+                        }
+                        &_selected {
+                            background-color: $grey;
+                        }
+                    }
+                }
+            }
+            &-input-text {
+                background-color: $grey;
+                width: 180px;
+                height: 30px;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: normal;
+                padding: 0 20px;
+                vertical-align: middle;
+                
+                &:focus {
+                    background-color: #fff;
+                    border: 2px solid $blue;
+                    color: $blue;
+                }
+            }
+            .selector {
+                line-height: 30px;
+                width: 180px;
+                height: 30px;
+                color: #fff;
+                background-color: $blue;
+                border-radius: 5px;
+                
+                &__options {
+                    background-color: $blue;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+                    overflow: hidden;
+                    
+                    & > li:hover {
+                        background-color: $mid-blue;
+                    }
+                }
+            }
+            .input-number {
+                &__button {
+                    background-color: $blue;
+                    color: #fff;
+                    border-radius: 5px;
+                    height: 30px;
+                    font-weight: normal;
+                    font-size: 16px;
+                    width: 30px;
+                }
+                &__input {
+                    background-color: $grey;
+                    height: 30px;
+                    width: 100px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    font-weight: normal;
+                    padding: 0 20px;
+                    margin: 0 10px;
+
+                    &:focus {
+                        background-color: #fff;
+                        border: 2px solid $blue;
+                        color: $blue;
+                    }
+                }
+            }
+            &-input-check {
+                display: inline-block;
+                cursor: pointer;
+                vertical-align: middle;
+                
+                .icon {
+                    @include sprite($ic_add_checkbox);
+                }
+                input:checked + .icon {
+                    @include sprite($ic_add_checkbox_checked);
+                }
+            }
+        }
+        &-text {
+            padding: 0 20px;
+            
+            textarea {
+                width: 100%;
+                height: 150px;
+                background-color: $grey;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: normal;
+                padding: 10px 20px;
+                margin: 0 0 10px;
+                resize: none;
+
+                &:focus {
+                    background-color: #fff;
+                    border: 2px solid $blue;
+                    color: $blue;
+                }
+            }
+        }
+        & > .icon {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            left: 20px;
+            
+            &.map { @include sprite($ic_add_map); }
+            &.operation { @include sprite($ic_operation); }
+            &.object { @include sprite($ic_object); }
+            &.area { @include sprite($ic_area); }
+            &.cost { @include sprite($ic_cost); }
+            &.description { @include sprite($ic_description); }
+            &.floor { @include sprite($ic_floor); }
+            &.rooms { @include sprite($ic_rooms); }
+            &.type { @include sprite($ic_type); }
+            &.profile { @include sprite($ic_profile); }
+            &.additional { @include sprite($ic_additional); }
+            &.upload { @include sprite($ic_upload); }
+        }
+    }
+    &__error {
+        font-size: 12px;
+        padding: 0 0 0 60px;
+        color: #a00;
+    }
+    &__separator {
+        background-color: $mid-grey;
+        height: 1px;
+        margin: 0 20px;
+        
+        .add-object__error + & {
+            margin: 10px 20px 0;
+        }
+    }
+}

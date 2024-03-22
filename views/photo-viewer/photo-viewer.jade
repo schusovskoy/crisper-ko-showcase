@@ -1,0 +1,14 @@
+template#photo-viewer
+
+    .photo-viewer.popup(data-bind="css: { 'popup_shown': isShown }")
+            
+        .photo-viewer__photo-container
+            .photo-viewer__left(data-bind="click: left")
+            img.photo-viewer__photo(data-bind="attr: { 'src': selected ? selected.slice(0,-5) + 'l.jpg' : '' }, click: right")
+            .vertical-aligner
+                
+        .photo-viewer__slider-container
+            slider.slider(params="photos: photos, selected: getObservableFor('selected'), delta: 100, count: 10")
+            .vertical-aligner
+                
+        .photo-viewer__close(data-bind="click: close") ✕

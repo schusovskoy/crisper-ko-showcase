@@ -1,0 +1,4 @@
+template#selector
+    
+    .selector__text(data-bind="text: text, click: open")
+    ul.selector__options(data-bind="template: { nodes: $componentTemplateNodes }, css: { 'selector__options_shown': isShown }")

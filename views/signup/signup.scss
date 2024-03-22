@@ -1,0 +1,27 @@
+.signup {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    @include transition-property(transform);
+    @include transition-duration(300ms);
+    @include transition-timing-function(ease-in-out);
+
+    &_shown {
+        @include transform(translateX(-100%));
+    }
+    & > p {
+        margin: -5px 0 5px 0;
+        font-size: 11px;
+        color: #c00;
+        text-align: left;
+        width: 350px;
+        display: inline-block;
+    }
+    & > span {
+        text-decoration: underline;
+        margin: 10px 0 0 0;
+        display: inline-block;
+        font-weight: normal;
+        cursor: pointer;
+    }
+}

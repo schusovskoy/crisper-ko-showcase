@@ -1,0 +1,7 @@
+.auth {
+    & > .popup__dialog {
+        height: 500px;
+        white-space: nowrap;
+        overflow-x: hidden;
+    }
+}

@@ -1,0 +1,128 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        // So that mobile will display zoomed in
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        // enable media queries for windows phone 8
+        meta(name='format-detection', content='telephone=no')
+        // disable auto telephone linking in iOS
+        title Two Columns to Rows (Simple)
+        style(type='text/css').
+            body {
+                margin: 0;
+                padding: 0;
+                font-family:Helvetica, Arial, sans-serif;
+                font-size:16px;
+                font-weight:400;
+                color:#3e3e3e;
+                line-height: 24px;
+            }
+            .text {
+                font-family:Helvetica, Arial, sans-serif;
+                font-size:16px;
+                font-weight:400;
+                color:#3e3e3e;
+                line-height: 24px;
+            }
+            h2 {
+                font-size:20px;
+                font-weight:600;
+            }
+            table {
+                border-spacing: 0;
+            }
+            table td {
+                border-collapse: collapse;
+            }
+            .ExternalClass {
+                width: 100%;
+            }
+            a {
+                color:#3480ac;
+                text-decoration: none;
+            }
+            .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+                line-height: 100%;
+            }
+            .ReadMsgBody {
+                width: 100%;
+                background-color: #ebebeb;
+            }
+            table {
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+            }
+            img {
+                -ms-interpolation-mode: bicubic;
+            }
+            .yshortcuts a {
+                border-bottom: none !important;
+            }
+            .ios-footer a {
+                color: #aaaaaa !important;
+                text-decoration: underline;
+            }
+            .content {
+                border: 1px solid #e6e9ed !important;
+            }
+            .button {
+                display: block;
+                background-color: #00d67a;
+                border-radius: 10px;
+                width: 150px;
+                line-height: 40px;
+                color:#ffffff;
+                margin: 0;
+                font-size:16px;
+                text-decoration: none;
+            }
+    body(style='margin:0; padding:0;', bgcolor='#f5f8fa', leftmargin='0', topmargin='0', marginwidth='0', marginheight='0')
+        table(border='0', width='100%', height='100%', cellpadding='0', cellspacing='0', bgcolor='#f5f8fa', background='img/bg.jpg')
+            tr
+                td(align='center', valign='top', bgcolor='#f5f8fa', style='background-color: #f5f8fa;', background='img/bg.jpg')
+                    table.text(border='0', width='600', cellpadding='0', cellspacing='0', style='width:600px;')
+                        // Header
+                        tr
+                            td.container-padding.header(align='left', width='50%')
+                                img(src='http://#{url}/resources/images/img_mail.png', style='padding:28px 0px 32px 0px;')
+                            td(align='right', width='50%')
+                                a.hide(href='mailto:support@m-listing.ru') support@m-listing.ru
+                        // Content
+                        tr.content
+                            // Text
+                            td.container-padding.content(colspan='2', align='left', style='padding:30px 30px 30px 30px;background-color:#ffffff')
+                                h2(style="margin:0; text-align: center;") Новый объект по вашему запросу
+                                br
+                                div(style="text-align: center;")
+                                    img(src="http://#{url}#{photo ? photo+'/m.jpg' : '/resources/images/default.jpg'}")
+                                br
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Адрес: #{city}, #{address}
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Цена: #{cost} руб.
+                                br
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Объект сделки: #{object == 'APARTMENT' ? 'Квартира' : object == 'HOUSE' ? 'Дом' : object == 'PARCEL' ? 'Участок' : 'Нежилое'}
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Тип сделки: #{operation == 'RENT' ? 'Аренда' : 'Продажа'}
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Общая площадь: #{sqmain} кв.м
+                                br
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Контактное лицо: #{fio}
+                                p(style="margin: 0 0 0 100px; font-size: 14px;") Телефон: +7#{phone}
+                                br
+                                
+                                div(style="text-align: center;")
+                                    a(href="http://#{url}/find/#{objectid}", style="display: inline-block; background-color: #00d67a; border-radius: 10px; width: 190px; line-height: 40px; color:#fff; margin: 0; font-size: 12px; text-decoration: none;") Перейти к объявлению
+                                br
+                                p(style="margin: 0; font-size: 12px; color: #b6babd; text-align: center;")
+                                    | Для отключения рассылки перейдите на сайт в раздел "Мои запросы" и удалите подписку.
+                                
+                        tr
+                            td.container-padding.footer-text.footer(align='center', colspan='2', style='font-size:14px; line-height:21px; padding:30px 125px 30px 125px')
+                                span(style='color:#b6babd;') © 2016 M-Listing
+                                br
+                                a(href='http://m-listing.ru') m-listing.ru
+                                br

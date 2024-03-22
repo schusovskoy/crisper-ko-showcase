@@ -1,0 +1,24 @@
+.signin {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    @include transition-property(transform);
+    @include transition-duration(300ms);
+    @include transition-timing-function(ease-in-out);
+
+    &:not(.signin_shown) {
+        @include transform(translateX(-100%));
+    }
+    &__remind {
+        position: absolute;
+        right: 12px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 20px;
+        font-weight: normal;
+        color: $blue;
+        text-decoration: underline;
+        font-size: 14px;
+    }
+}

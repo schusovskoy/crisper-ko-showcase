@@ -1,0 +1,12 @@
+.social-extra {
+    & > .popup__dialog {
+        padding: 35px 0;
+
+        & > p {
+            padding: 0 160px;
+            margin-top: 0;
+            font-weight: normal;
+            line-height: 25px;
+        }
+    }
+}

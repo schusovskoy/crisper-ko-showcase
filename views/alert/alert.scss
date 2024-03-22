@@ -1,0 +1,14 @@
+.alert {
+    & > .popup__dialog {
+        padding: 50px 120px;
+    }
+    &__header {
+        font-weight: normal;
+        font-size: 18px;
+    }
+    &__text {
+        font-size: 16px;
+        margin: 20px 0;
+        text-align: center;
+    }
+}

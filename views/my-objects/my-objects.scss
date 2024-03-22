@@ -1,0 +1,15 @@
+.my-objects {
+    &__header {
+        line-height: 80px;
+        background-color: $grey;
+        border-bottom: 1px solid $mid-grey;
+        text-align: center;
+        font-weight: 500;
+    }
+    .objects-list__results-item-additional {
+        padding: 0;
+    }
+    &.objects-list_grid {
+        left: 0;
+    }
+}

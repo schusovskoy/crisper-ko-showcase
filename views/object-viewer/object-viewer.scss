@@ -1,0 +1,224 @@
+.object-viewer {
+    &__header {
+        position: relative;
+        margin: 50px 0 0 0;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        font-weight: 600;
+    }
+    &__content, &__loader {
+        position: absolute;
+        top: 150px;
+        bottom: 0;
+        width: 100%;
+        overflow: hidden;
+        
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            box-shadow: inset 0 0 0 3px $mid-blue;
+        }
+    }
+    &__close {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 0;
+        bottom: 0;
+        right: 40px;
+        margin: auto;
+        font-size: 20px;
+        line-height: 20px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+        
+        &:active {
+            font-size: 19px;
+        }
+    }
+    &__cover {
+        margin: 0 40px;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        
+        &-padder {
+            padding-top: 56.25%;
+        }
+    }
+    .slider {
+        height: 80px;
+        line-height: 80px;
+        font-size: 30px;
+        color: $mid-blue;
+        
+        &__left, &__right {
+            width: 50px;
+            margin: 0 20px 0 30px;
+            
+            &:active {
+                font-size: 28px;
+            }
+        }
+        &__right {
+            margin: 0 30px 0 20px;
+        }
+        &__container {
+            left: 100px;
+            right: 100px;
+        }
+        &__photo {
+            width: 50px;
+            height: 50px;
+            margin: 0 6.25px;
+            background-size: cover;
+            background-position: center;
+            
+            &_selected {
+                border: 2px solid $mid-blue;
+            }
+        }
+    }
+    &__separator {
+        height: 1px;
+        background-color: $mid-grey;
+        
+        .content-slider + & {
+            margin: 0 40px;
+        }
+    }
+    &__info {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 14px;
+        
+        .icon {
+            vertical-align: middle;
+            margin: 0 20px 0;
+            &.address {@include sprite($ic_find_address, inline-block);}
+            &.cost {@include sprite($ic_find_cost, inline-block);}
+        }
+    }
+    &__heading {
+        margin: 0;
+        height: 80px;
+        line-height: 80px;
+        font-size: 16px;
+        text-align: center;
+    }
+    &__main {
+        margin: 0 40px;
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid $mid-grey;
+        font-size: 14px;
+        font-weight: 600;
+        
+        &-key, &-value {
+            margin: 0;
+            width: 50%;
+            float: left;
+        }
+        &-value {
+            color: $mid-blue;
+            text-align: right;
+            float: right;
+        }
+    }
+    .content-slider {
+        height: 80px;
+        line-height: 80px;
+        font-size: 14px;
+
+        &__left, &__right {
+            width: 45px;
+            font-size: 30px;
+            color: $mid-blue;
+
+            &:active {
+                font-size: 28px;
+            }
+        }
+        &__container {
+            left: 45px;
+            right: 45px;
+        }
+        &__item {
+            width: 120px;
+            height: 100%;
+            text-align: center;
+            line-height: normal;
+        }
+        .icon {
+            margin: 15px 0 5px 0;
+            
+            &.lift {@include sprite($ic_elevator, inline-block);}
+            &.parking {@include sprite($ic_parking, inline-block);}
+            &.internet {@include sprite($ic_internet, inline-block);}
+            &.hypothec {@include sprite($ic_ipoteka, inline-block);}
+            &.furniture {@include sprite($ic_furniture, inline-block);}
+            &.tech {@include sprite($ic_tech, inline-block);}
+            &.water {@include sprite($ic_water, inline-block);}
+            &.gas {@include sprite($ic_gas, inline-block);}
+            &.electricity {@include sprite($ic_electric, inline-block);}
+            &.canalization {@include sprite($ic_canalization, inline-block);}
+        }
+    }
+    &__description {
+        margin: 0 40px;
+        text-align: justify;
+        font-size: 14px;
+    }
+    &__contact {
+        position: relative;
+        height: 80px;
+        margin: 0 40px;
+        padding: 1px 0 0 0;
+        font-size: 14px;
+        
+        &-value {
+            margin: 0;
+            line-height: 40px;
+            color: #000;
+            text-decoration: none;
+        }
+        &-key {
+            line-height: 20px;
+            margin: 19px 0 0 0;
+            color: $mid-blue;
+        }
+        .icon {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            &.fio {@include sprite($ic_viewer_fio);}
+            &.phone {@include sprite($ic_viewer_phone);}
+        }
+    }
+    .scrollable__container {
+        padding: 0 0 40px;
+    }
+    &__edit-container {
+        margin: 40px 0 0 0;
+        text-align: center;
+        
+        .green-convex-button {
+            display: inline-block;
+            line-height: 40px;
+            text-decoration: none;
+            width: 200px;
+        }
+        .blue-convex-button {
+            margin: 20px 0 0 0;
+            width: 200px;
+        }
+    }
+}

@@ -1,0 +1,3 @@
+template#map
+
+    .map.page(data-bind="css: { 'page_shown': $parent.page != 'START' }, map: true, visibleRegion: reObjectRequest, marker: { coordinate: markerPanTo(), zoom: getZoom() }, markers: markersCollection(), layersShow: layerToShow()")

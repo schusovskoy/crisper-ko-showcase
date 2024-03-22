@@ -1,0 +1,67 @@
+.map {
+    top: 50px;
+    bottom: 0;
+    height: auto;
+    
+    .leaflet-top {
+        right: 465px;
+        left: auto;
+    }
+    &__popup {
+        width: 300px;
+        
+        & > div:first-child {
+            padding: 0;
+            border-radius: 5px;
+            overflow: hidden;
+            
+            & > div {
+                margin: 0;
+            }
+        }
+        &-cover {
+            display: block;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            
+            &:active {
+                opacity: initial;
+            }
+        }
+        &-info p {
+            margin: 0;
+            line-height: 25px;
+            padding: 0 0 0 40px;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            
+            .icon {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 15px;
+                margin: auto;
+                
+                &.address {@include sprite($ic_find_address);}
+                &.cost {@include sprite($ic_find_cost);}
+                &.fio {@include sprite($ic_find_fio);}
+                &.phone {@include sprite($ic_find_phone);}
+            }
+        }
+        &-additional {
+            border-top: 1px solid $mid-grey;
+            text-align: center;
+            line-height: 40px;
+            white-space: nowrap;
+            
+            p {
+                margin: 0;
+                display: inline-block;
+                width: 33.333333%;
+            }
+        }
+    }
+}

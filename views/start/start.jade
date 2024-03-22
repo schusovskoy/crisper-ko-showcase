@@ -1,0 +1,104 @@
+template#start
+
+    .start.page.scrollable(data-bind="css: { 'page_shown': $parent.page == 'START' }, scroll: 500")
+        .scrollable__container
+            
+            section.main
+                .centerer
+                    article.text-container
+                        .text Все сделки с недвижимостью&nbsp;
+                            br
+                            | и профессиональная сеть риелторов на одном сайте
+                            br
+                            .icon
+                        .vertical-aligner
+                    form.find-form(data-bind="submit: find")
+                        label.operation
+                            input(type="radio", name="operation", value="SELL", data-bind="checked: reObjectRequest.operation")
+                            div КУПИТЬ
+                        label.operation
+                            input(type="radio", name="operation", value="RENT", data-bind="checked: reObjectRequest.operation")
+                            div СНЯТЬ
+                        label.object
+                            input(type="radio", name="object", value="APARTMENT", data-bind="checked: reObjectRequest.object")
+                            .apartment
+                                .icon
+                                |Квартиру
+                        label.object
+                            input(type="radio", name="object", value="HOUSE", data-bind="checked: reObjectRequest.object")
+                            .house
+                                .icon
+                                |Дом
+                        label.object
+                            input(type="radio", name="object", value="INDUSTRIAL", data-bind="checked: reObjectRequest.object")
+                            .industrial
+                                .icon
+                                |Нежилое
+                        label.object
+                            input(type="radio", name="object", value="PARCEL", data-bind="checked: reObjectRequest.object")
+                            .parcel
+                                .icon
+                                |Участок
+                        .find-container
+                            .search(data-bind="component: { name: 'search', params: { placeholder: 'Город поиска', value: reObjectRequest.getObservableFor('city'), searchMethod: citiesService.searchCity.bind(citiesService) } }")
+                            input(type="submit", value="НАЙТИ")
+                            .vertical-aligner
+            section.scroll
+                .icon
+            section.advantages
+                .interactive
+                    img(src="/resources/images/img_main_interactive.jpg")
+                    .text Интерактивный поиск
+                .mobile
+                    img(src="/resources/images/img_main_mobile.jpg")
+                    .text Мобильное приложение
+                .instruments
+                    img(src="/resources/images/img_main_instruments.jpg")
+                    .text Инструменты риелтора
+            section.mobile
+                .centerer
+                    .container
+                        .icon.logo-mobile
+                        br
+                        | Мобильное приложение M-listing всегда под рукой!
+                        br
+                        span на Google Play
+                        br
+                        a.icon.google(href="https://play.google.com/store/apps/details?id=com.sml.mlisting", target="_blank")
+                    .vertical-aligner
+            section.sitemap
+                ul.help
+                    li ПОМОЩЬ
+                    li
+                        a(href="mailto:support@m-listing.ru?subject=Вопрос в службу поддержки с сайта m-listing.ru") Задать вопрос
+                    li.icon
+                ul.security
+                    li БЕЗОПАСНОСТЬ
+                    //li Пользовательское соглашение
+                    //li Правила использования
+                    li.icon
+                ul.to-agents
+                    li РИЕЛТОРУ
+                    //li Преимущества
+                    //li Тарифы
+                    //li Получить доступ
+                    li.icon
+                ul.information
+                    li ИНФОРМАЦИЯ
+                    //li Вакансии
+                    //li Реклама
+                    //li О нас
+                    li.icon
+            footer
+                .text M-listing — сайт объявлений о покупке, продаже и аренде любых видов недвижимости. Использование сайта,&nbsp;
+                    | в том числе подача объявлений, означает согласие с пользовательским соглашением. Оплачивая услуги на&nbsp;
+                    | сайте, вы принимаете оферту. Администрация сайта не несет ответственности за опубликованные материалы.&nbsp;
+                    | Однако объявления проходят частичную модерацию. Мы настоятельно рекомендуем не опубликовывать на сайте&nbsp;
+                    | материалы, содержащие призывы к насилию, порочащие честь и достоинство остальных пользователей,&nbsp;
+                    | порнографические, экстремистские и любые другие запрещенные на территории РФ материалы.
+                .logo
+                    .icon
+                    .vertical-aligner
+                .copyright
+                    a(href="http://smedialink.com", target="_blank")
+                        img(src="/resources/images/img_copyright.png")
